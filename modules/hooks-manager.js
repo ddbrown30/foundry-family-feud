@@ -34,15 +34,5 @@ export class HooksManager {
       Utils.loadTemplates();
       registerSettings();
     });
-
-    Hooks.once("socketlib.ready", () => {
-      game.foundryFamilyFeud = game.foundryFamilyFeud ?? {};
-
-      game.foundryFamilyFeud.socket = socketlib.registerModule(FFF_CONFIG.NAME);
-    });
-
-    Hooks.on("ready", () => {
-      //Handlers.onReady();
-    });
   }
 }
