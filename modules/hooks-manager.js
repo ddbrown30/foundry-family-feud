@@ -20,6 +20,8 @@ export class HooksManager {
       game.foundryFamilyFeud.questionEditor = function () { new QuestionEditor().render(true); };
       game.foundryFamilyFeud.boardController = function () { new BoardController().render(true); };
       game.foundryFamilyFeud.generateBoard = BoardGenerator.generateBoard;
+      game.foundryFamilyFeud.destroyBoard = BoardGenerator.destroyBoard;
+      game.foundryFamilyFeud.repositionBoard = BoardGenerator.repositionBoard;
 
       CONFIG.fontDefinitions['Anton'] = {
         editor: true,

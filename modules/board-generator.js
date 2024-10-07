@@ -1,9 +1,10 @@
 import * as FFF_CONFIG from "./fff-config.js";
+import { GameBoard } from "./game-board.js";
 import { Utils } from "./utils.js";
 
 export class BoardGenerator {
 
-    static async generateBoard() {
+    static async generateBoard(x, y) {
         let boardData = {};
 
         let tileData = {
@@ -34,7 +35,7 @@ export class BoardGenerator {
         textData.hidden = true;
         let totalScore = await BoardGenerator.createText(textData);
         boardData.totalScore = totalScore.id;
-        
+
         tileData.width = 208;
         tileData.height = 277;
         tileData.y = 208;
@@ -111,6 +112,10 @@ export class BoardGenerator {
         }
 
         await Utils.setModuleFlag(board, FFF_CONFIG.FLAGS.boardData, boardData);
+
+        if (x != 0 || y != 0) {
+            await BoardGenerator.repositionBoard(x, y);
+        }
     }
 
     static async createTile(tileData) {
@@ -121,5 +126,85 @@ export class BoardGenerator {
     static async createText(textData) {
         let drawDoc = new DrawingDocument(textData);
         return (await canvas.scene.createEmbeddedDocuments("Drawing", [drawDoc]))[0];
+    }
+
+    static async repositionBoard(x, y) {
+        let boardTile = canvas.scene.tiles.find((t) => Utils.hasModuleFlags(t));
+        if (boardTile) {
+            let flagData = structuredClone(Utils.getModuleFlag(boardTile, FFF_CONFIG.FLAGS.boardData));
+            let boardData = {};
+            boardData.totalScore = canvas.scene.drawings.get(flagData.totalScore);
+            boardData.strikes = flagData.strikes;
+            boardData.strikes.tiles[0] = canvas.scene.tiles.get(boardData.strikes.tiles[0]);
+            boardData.strikes.tiles[1] = canvas.scene.tiles.get(boardData.strikes.tiles[1]);
+            boardData.strikes.tiles[2] = canvas.scene.tiles.get(boardData.strikes.tiles[2]);
+
+            boardData.panels = [];
+            for (let i = 0; i < 8; ++i) {
+                boardData.panels[i] = {};
+                const panel = boardData.panels[i];
+                const panelIds = flagData.panels[i];
+
+                panel.unrevealedPanel = canvas.scene.tiles.get(panelIds.unrevealedPanel);
+                panel.revealedPanel = canvas.scene.tiles.get(panelIds.revealedPanel);
+                panel.numberTile = canvas.scene.tiles.get(panelIds.numberTile);
+                panel.answerCount = canvas.scene.drawings.get(panelIds.answerCount);
+                panel.answerText = canvas.scene.drawings.get(panelIds.answerText);
+            }
+
+            let xDelta = x - boardTile.x;
+            let yDelta = y - boardTile.y;
+
+            let tileUpdateData = [
+                { _id: boardTile.id, x: boardTile.x + xDelta, y: boardTile.y + yDelta },
+                { _id: boardData.strikes.tiles[0].id, x: boardData.strikes.tiles[0].x + xDelta, y: boardData.strikes.tiles[0].y + yDelta },
+                { _id: boardData.strikes.tiles[1].id, x: boardData.strikes.tiles[1].x + xDelta, y: boardData.strikes.tiles[1].y + yDelta },
+                { _id: boardData.strikes.tiles[2].id, x: boardData.strikes.tiles[2].x + xDelta, y: boardData.strikes.tiles[2].y + yDelta },
+            ];
+
+            let textUpdateData = [
+                { _id: boardData.totalScore.id, x: boardData.totalScore.x + xDelta, y: boardData.totalScore.y + yDelta },
+            ];
+
+            for (let i = 0; i < 8; ++i) {
+                const panel = boardData.panels[i];
+
+                tileUpdateData.push({ _id: panel.unrevealedPanel.id, x: panel.unrevealedPanel.x + xDelta, y: panel.unrevealedPanel.y + yDelta });
+                tileUpdateData.push({ _id: panel.revealedPanel.id, x: panel.revealedPanel.x + xDelta, y: panel.revealedPanel.y + yDelta });
+                tileUpdateData.push({ _id: panel.numberTile.id, x: panel.numberTile.x + xDelta, y: panel.numberTile.y + yDelta });
+
+                textUpdateData.push({ _id: panel.answerText.id, x: panel.answerText.x + xDelta, y: panel.answerText.y + yDelta });
+                textUpdateData.push({ _id: panel.answerCount.id, x: panel.answerCount.x + xDelta, y: panel.answerCount.y + yDelta });
+            }
+
+            await canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
+            await canvas.scene.updateEmbeddedDocuments("Drawing", textUpdateData);
+        }
+    }
+
+    static async destroyBoard() {
+        let boardTile = canvas.scene.tiles.find((t) => Utils.hasModuleFlags(t));
+        if (boardTile) {
+            let tileDestroyData = [];
+            let textDestroyData = [];
+
+            let flagData = Utils.getModuleFlag(boardTile, FFF_CONFIG.FLAGS.boardData);
+
+            tileDestroyData.push(boardTile.id);
+            textDestroyData.push(flagData.totalScore);
+            tileDestroyData = tileDestroyData.concat(flagData.strikes.tiles);
+
+            for (let i = 0; i < 8; ++i) {
+                const panel = flagData.panels[i];
+                tileDestroyData.push(panel.unrevealedPanel);
+                tileDestroyData.push(panel.revealedPanel);
+                tileDestroyData.push(panel.numberTile);
+                textDestroyData.push(panel.answerCount);
+                textDestroyData.push(panel.answerText);
+            }
+
+            await canvas.scene.deleteEmbeddedDocuments("Tile", tileDestroyData);
+            await canvas.scene.deleteEmbeddedDocuments("Drawing", textDestroyData);
+        }
     }
 }

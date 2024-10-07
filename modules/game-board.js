@@ -48,33 +48,6 @@ export class GameBoard {
         }
     }
 
-    async repositionBoard(x, y) {
-        let xDelta = x - this.boardData.board.x;
-        let yDelta = y - this.boardData.board.y;
-
-        let tileUpdateData = [
-            { _id: this.boardData.board.id, x: this.boardData.board.x + xDelta, y: this.boardData.board.y + yDelta },
-        ];
-
-        let textUpdateData = [
-            { _id: this.boardData.totalScore.id, x: this.boardData.totalScore.x + xDelta, y: this.boardData.totalScore.y + yDelta },
-        ];
-
-        for (let i = 0; i < 8; ++i) {
-            const panel = this.boardData.panels[i];
-
-            tileUpdateData.push({ _id: panel.unrevealedPanel.id, x: panel.unrevealedPanel.x + xDelta, y: panel.unrevealedPanel.y + yDelta });
-            tileUpdateData.push({ _id: panel.revealedPanel.id, x: panel.revealedPanel.x + xDelta, y: panel.revealedPanel.y + yDelta });
-            tileUpdateData.push({ _id: panel.numberTile.id, x: panel.numberTile.x + xDelta, y: panel.numberTile.y + yDelta });
-
-            textUpdateData.push({ _id: panel.answerText.id, x: panel.answerText.x + xDelta, y: panel.answerText.y + yDelta });
-            textUpdateData.push({ _id: panel.answerCount.id, x: panel.answerCount.x + xDelta, y: panel.answerCount.y + yDelta });
-        }
-
-        await canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
-        await canvas.scene.updateEmbeddedDocuments("Drawing", textUpdateData);
-    }
-
     async revealAnswer(answerIndex, addScore) {
         if (answerIndex >= this.activeQuestion.answerData.length) {
             return;

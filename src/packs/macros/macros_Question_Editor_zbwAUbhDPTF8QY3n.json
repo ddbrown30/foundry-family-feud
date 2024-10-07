@@ -1,0 +1,27 @@
+{
+  "name": "Question Editor",
+  "type": "script",
+  "command": "game.foundryFamilyFeud.questionEditor()",
+  "img": "modules/foundry-family-feud/assets/logo.webp",
+  "author": "26zedh1nuCLjFH0V",
+  "scope": "global",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "26zedh1nuCLjFH0V": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "swade",
+    "systemVersion": "4.1.1",
+    "createdTime": 1728344987891,
+    "modifiedTime": 1728345282707,
+    "lastModifiedBy": "26zedh1nuCLjFH0V"
+  },
+  "_id": "zbwAUbhDPTF8QY3n",
+  "sort": 500000,
+  "_key": "!macros!zbwAUbhDPTF8QY3n"
+}
