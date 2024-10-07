@@ -136,4 +136,9 @@ export class GameBoard {
 
         foundry.audio.AudioHelper.play({src: FFF_CONFIG.DEFAULT_CONFIG.sfx.strike, loop: false}, true);
     }
+
+    async setTotalScore(score) {
+        this.activeQuestion.totalScore = score;
+        await canvas.scene.updateEmbeddedDocuments("Drawing", [{ _id: this.boardData.totalScore.id, text: this.activeQuestion.totalScore.toString() }]);
+    }
 }

@@ -76,6 +76,7 @@
   margin-bottom: 10px;
   align-items: center;
   text-wrap: nowrap;
+  gap: 5px;
 }
 
 .board-controller-row > * {
@@ -86,7 +87,11 @@
   max-width: fit-content;
 }
 
-.fff .board-controller-row.strike-button {
-  justify-content: center;
+.fff .board-controller-row button {
+  max-width: fit-content;
+}
+
+.fff .board-controller-row .total-score-input {
+  max-width: 50px;
 }
 

@@ -118,6 +118,8 @@ export class BoardController extends FormApplication {
             this.onResetBoard(event);
         } else if (name.startsWith("strike")) {
             this.onStrike(event);
+        } else if (name.startsWith("total-score-button")) {
+            this.onSetTotalScore(event);
         }
 
         this.render();
@@ -201,5 +203,13 @@ export class BoardController extends FormApplication {
         const selection = $(event.target).find("option:selected");
         this.questionData.selectedPageName = selection.val();
         this.render();
+    }
+
+    async onSetTotalScore(event) {
+        event.preventDefault();
+        const totalScoreInput = this._element.find("input[name=total-score-input")[0];
+        if(totalScoreInput.value.length) {
+            this.gameBoard.setTotalScore(Number(totalScoreInput.value));
+        }
     }
 }
