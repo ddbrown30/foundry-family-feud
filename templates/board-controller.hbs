@@ -1,0 +1,50 @@
+<div class='fff'>
+    <form id="board-controller">
+        <div class="journal-section">
+            <div class="board-controller-row">
+                <label for="journals">Journal</label>
+                <select name="journals" class="journals" title="">
+                    {{selectOptions journals selected=selectedJournalName valueAttr="name" labelAttr="name"}}
+                </select>
+            </div>
+
+            <div class="board-controller-row">
+                <label for="pages">Page</label>
+                <select name="pages" class="pages" title="">
+                    {{selectOptions pages selected=selectedPageName valueAttr="name" labelAttr="name"}}
+                </select>
+            </div>
+        </div>
+
+        <div class="board-controller-row">
+            {{#unless boardLoaded}}
+            <button type="button" name="find-board">Find Board</button>
+            {{else}}
+            <button type="button" name="load-question">Load Question</button>
+            {{#if questionLoaded}}
+            <button type="button" name="reset-board">Reset Board</button>
+            {{/if}}
+            {{/unless}}
+        </div>
+
+        <table>
+            {{#each answers as |answer|}}
+            <tr>
+                <td>{{@answer.label}}</td>
+                <td>Text: {{answer.text}}</td>
+                <td>Count: {{answer.count}}</td>
+                <td><button type="button" name="reveal-score-{{@index}}">Reveal and Score</button></td>
+                <td><button type="button" name="reveal-{{@index}}">Reveal</button></td>
+            </tr>
+            {{/each}}
+        </table>
+
+        {{#if questionLoaded}}
+        <div class="board-controller-row strike-button">
+            <button type="button" name="strike1">Strike 1</button>
+            <button type="button" name="strike2">Strike 2</button>
+            <button type="button" name="strike3">Strike 3</button>
+        </div>
+        {{/if}}
+    </form>
+</div>

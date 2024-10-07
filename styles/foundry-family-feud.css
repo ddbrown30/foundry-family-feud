@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "Anton";
+  src: url("../fonts/Anton-Regular.ttf") format("truetype");
+}
+
+.fff .journal-section {
+  align-items: center;
+  border-top: 1px solid var(--color-border-light-tertiary);
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+}
+
+.journal-section > * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 3;
+}
+
+.fff .question-editor-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.question-editor-row > * {
+  flex: 1;
+}
+
+.fff .question-editor-num-input {
+  max-width: 50px;
+}
+
+.fff .question-editor-answer-label {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 2;
+}
+
+.fff .question-editor-answer-text {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 3;
+}
+
+.fff .question-editor-answer-count {
+  display: flex;
+  flex-direction: column;
+  max-width: 50px;
+}
+
+.fff footer.form-footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 2px;
+  padding: 2px;
+  margin-top: 20px;
+}
+
+.fff footer.form-footer button {
+  max-width: fit-content;
+}
+
+.fff .board-controller-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+  text-wrap: nowrap;
+}
+
+.board-controller-row > * {
+  flex: 1;
+}
+
+.fff .board-controller-row button {
+  max-width: fit-content;
+}
+
+.fff .board-controller-row.strike-button {
+  justify-content: center;
+}
+

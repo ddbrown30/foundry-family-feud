@@ -1,0 +1,48 @@
+<div class='fff'>
+    <form id="question-editor">
+        <div class="journal-section">
+            <div class="question-editor-row">
+                <label for="journals">Journal</label>
+                <select name="journals" class="journals" title="">
+                    {{selectOptions journals selected=selectedJournalName valueAttr="name" labelAttr="name"}}
+                </select>
+                <input type="text" class="" name="new-journal-name" value="{{newJournalName}}" {{#unless (eq selectedJournalName "Create New Journal")}}disabled{{/unless}}>
+            </div>
+
+            <div class="question-editor-row">
+                <label for="pages">Page</label>
+                <select name="pages" class="pages" title="">
+                    {{selectOptions pages selected=selectedPageName valueAttr="name" labelAttr="name"}}
+                </select>
+                <input type="text" class="" name="new-page-name" value="{{newPageName}}" {{#unless (eq selectedPageName "Create New Page")}}disabled{{/unless}}>
+            </div>
+
+            <div class="board-controller-row">
+                {{#unless (eq selectedJournalName "Create New Journal")}}
+                {{#unless (eq selectedPageName "Create New Page")}}
+                <button type="button" name="load-question">Load Question</button>
+                {{/unless}}
+                {{/unless}}
+            </div>
+        </div>
+
+        <div class="question-editor-row">
+            <label for="num-answers" class="inset-label">Number of Answers</label>
+            <input type="number" class="question-editor-num-input" name="num-answers" value="{{numAnswers}}">
+        </div>
+
+        {{#each answers as |answer|}}
+        <div class="question-editor-row">
+            <label for="answer-text-{{@index}}" class="question-editor-answer-label">{{@answer.label}}</label>
+            <input type="text" class="question-editor-answer-text" name="answer-text-{{@index}}" value="{{answer.text}}">
+            <input type="number" class="question-editor-answer-count" name="answer-count-{{@index}}" value="{{answer.count}}">
+        </div>
+        {{/each}}
+
+        <footer class="form-footer">
+            <button type="button" name="save" form="question-editor">
+                <i class="far fa-save"></i> Save
+            </button>
+        </footer>
+    </form>
+</div>
