@@ -1,6 +1,6 @@
 # Foundry Family Feud
 
-This module allows you to run a family feud style game through Foundry.
+This module allows you to run a Family Feud style game through Foundry.
 
 ### Create Questions
 
