@@ -69,6 +69,7 @@ export class BoardGenerator {
         const deltaX = 315 * scale;
         const deltaY = 92 * scale;
 
+        boardData.answerFontSize = 44 * scale;
         boardData.panels = [];
         for (let i = 0; i < 8; ++i) {
             boardData.panels[i] = {};
@@ -104,7 +105,7 @@ export class BoardGenerator {
             textData.x = answerCountStartX + (deltaX * Math.floor(i / 4));
             textData.y = answerCountStartY + (deltaY * Math.floor(i % 4));
             textData.elevation = 20;
-            textData.fontSize = 44 * scale;
+            textData.fontSize = boardData.answerFontSize;
             textData.text = "99";
             textData.hidden = true;
             let answerCount = await BoardGenerator.createText(textData);

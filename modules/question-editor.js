@@ -214,6 +214,10 @@ export class QuestionEditor extends FormApplication {
             questionText: this.questionData.questionText,
             answers: this.questionData.answers
         }
+        questionData.answers.length = this.questionData.numAnswers;
+        for (let answer of questionData.answers) {
+            delete answer.label;
+        }
 
         let pageText = JSON.stringify(questionData, null, 2);
         await journal.updateEmbeddedDocuments("JournalEntryPage", [{_id: page.id, "text.content": pageText}]);

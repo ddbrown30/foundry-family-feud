@@ -98,6 +98,8 @@ export class Utils {
 
     static parseJson(str) {
         try {
+            str = str.replace("<p>", "");
+            str = str.replace("</p>", "");
             return JSON.parse(str);
         } catch (e) {
             return null;

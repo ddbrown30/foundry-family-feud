@@ -27,6 +27,12 @@
             {{/unless}}
         </div>
 
+        <div class="board-controller-row">
+            {{#if questionLoaded}}
+            <span>Question: {{questionText}}</span>
+            {{/if}}
+        </div>
+
         <table>
             {{#each answers as |answer|}}
             <tr>

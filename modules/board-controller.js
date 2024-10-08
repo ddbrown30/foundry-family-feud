@@ -61,6 +61,7 @@ export class BoardController extends FormApplication {
         data.pages.sort((a, b) => a.name.localeCompare(b.name));
         data.selectedPageName = this.questionData.selectedPageName = this.questionData.selectedPageName ?? data.pages[0]?.name;
 
+        data.questionText = this.questionData.questionText;
         data.answers = [];
 
         if (this.questionData.answers) {
@@ -132,6 +133,8 @@ export class BoardController extends FormApplication {
         if (boardTile) {
             let flagData = Utils.getModuleFlag(boardTile, FFF_CONFIG.FLAGS.boardData);
             this.boardData = {};
+            this.boardData.answerFontSize = flagData.answerFontSize;
+
             this.boardData.totalScore = canvas.scene.drawings.get(flagData.totalScore);
             this.boardData.strikes = flagData.strikes;
             this.boardData.strikes.tiles[0] = canvas.scene.tiles.get(this.boardData.strikes.tiles[0]);
@@ -164,6 +167,7 @@ export class BoardController extends FormApplication {
             let selectedPage = selectedJournal.pages.find((p) => p.name == this.questionData.selectedPageName);
             if (selectedPage) {
                 let questionData = Utils.parseJson(selectedPage.text.content);
+                this.questionData.questionText = questionData?.questionText ?? "";
                 this.questionData.answers = questionData?.answers ?? [];
             }
         }

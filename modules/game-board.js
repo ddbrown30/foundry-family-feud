@@ -31,7 +31,7 @@ export class GameBoard {
             let answerText = i < this.activeQuestion.answerData.length ? this.activeQuestion.answerData[i].text : ".";
             let answerCount = i < this.activeQuestion.answerData.length ? this.activeQuestion.answerData[i].count.toString() : ".";
 
-            let fontSize = 44;
+            let fontSize = this.boardData.answerFontSize;
             let style = new PIXI.TextStyle({ fontFamily: 'Anton', fontSize: fontSize });
             let textMetrics = PIXI.TextMetrics.measureText(answerText, style);
             while (textMetrics.width > panel.answerText.shape.width) {
