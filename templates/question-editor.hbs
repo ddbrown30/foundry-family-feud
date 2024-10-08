@@ -27,6 +27,11 @@
         </div>
 
         <div class="question-editor-row">
+            <label for="question" class="inset-label">Question</label>
+            <input type="text" class="question-editor-question" name="question" value="{{questionText}}">
+        </div>
+
+        <div class="question-editor-row">
             <label for="num-answers" class="inset-label">Number of Answers</label>
             <input type="number" class="question-editor-num-input" name="num-answers" value="{{numAnswers}}">
         </div>
@@ -40,9 +45,11 @@
         {{/each}}
 
         <footer class="form-footer">
+            {{#if canSave}}
             <button type="button" name="save" form="question-editor">
                 <i class="far fa-save"></i> Save
             </button>
+            {{/if}}
         </footer>
     </form>
 </div>

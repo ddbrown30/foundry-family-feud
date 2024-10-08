@@ -30,6 +30,10 @@
   flex: 1;
 }
 
+.fff .question-editor-question {
+  flex: 2;
+}
+
 .fff .question-editor-num-input {
   max-width: 50px;
 }

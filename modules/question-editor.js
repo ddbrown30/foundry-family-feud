@@ -8,6 +8,7 @@ export class QuestionEditor extends FormApplication {
     constructor(options = {}) {
         super(null, options);
         this.questionData = {
+            questionText: "",
             numAnswers: 1,
             answers: [{
                 text: "Answer Text",
@@ -44,6 +45,7 @@ export class QuestionEditor extends FormApplication {
     async prepareData() {
         const data = {}
 
+        data.questionText = this.questionData.questionText;
         data.numAnswers = this.questionData.numAnswers;
         data.answers = [];
         for (let i = 0; i < data.numAnswers; ++i) {
@@ -85,6 +87,12 @@ export class QuestionEditor extends FormApplication {
         
         data.pages.sort((a, b) => a.name.localeCompare(b.name));
         data.pages.unshift({ name: this.createNewPageOption });
+
+        data.newJournalName = this.newJournalName;
+        data.newPageName = this.newPageName;
+
+        data.canSave = !!((selectedJournal || (this.newJournalName && this.newJournalName.length)) &&
+                        (data.selectedPageName != this.createNewPageOption || (this.newPageName && this.newPageName.length)));
 
         return data;
     }
@@ -135,10 +143,14 @@ export class QuestionEditor extends FormApplication {
         if (name.startsWith("num-answers")) {
             this.questionData.numAnswers = Math.min(Math.max(event.target.value, 1), 8);
             return this.render();
+        } else if (name == "question") {
+            this.questionData.questionText = event.target.value;
         } else if (name.startsWith("new-journal-name")) {
             this.newJournalName = event.target.value;
+            this.render();
         } else if (name.startsWith("new-page-name")) {
             this.newPageName = event.target.value;
+            this.render();
         } else if (name.startsWith("answer-text-")) {
             this.onChangeAnswerText(event);
         } else if (name.startsWith("answer-count-")) {
@@ -199,6 +211,7 @@ export class QuestionEditor extends FormApplication {
         }
 
         let questionData = {
+            questionText: this.questionData.questionText,
             answers: this.questionData.answers
         }
 
@@ -215,6 +228,7 @@ export class QuestionEditor extends FormApplication {
             if (selectedPage) {
                 let questionData = Utils.parseJson(selectedPage.text.content);
                 if (questionData) {
+                    this.questionData.questionText = questionData.questionText;
                     this.questionData.numAnswers = questionData.answers.length;
                     this.questionData.answers = questionData.answers;
                 }

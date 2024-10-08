@@ -150,11 +150,10 @@ export class BoardController extends FormApplication {
                 panel.answerCount = canvas.scene.drawings.get(panelIds.answerCount);
                 panel.answerText = canvas.scene.drawings.get(panelIds.answerText);
             }
+
+            this.boardLoaded = true;    
+            this.gameBoard = new GameBoard(this.boardData);
         }
-
-        this.boardLoaded = true;
-
-        this.gameBoard = new GameBoard(this.boardData);
     }
 
     async onLoadQuestion(event) {
