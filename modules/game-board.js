@@ -77,31 +77,32 @@ export class GameBoard {
     }
 
     async displayStrike(strikeNum) {
+        let boardX = this.boardData.boardTile.x;
         function hideStrikes(tileUpdateData) {
             for (let tile of tileUpdateData) {
-                tile.x = 0;
+                tile.x = boardX;
                 tile.hidden = true;
             }
             canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
         }
         if (strikeNum == 1) {
             let tileUpdateData = [
-                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[0][0] },
+                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[0][0] + boardX },
             ];
             await canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
             setTimeout(function () { hideStrikes(tileUpdateData) }, 1000);
         } else if (strikeNum == 2) {
             let tileUpdateData = [
-                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[1][0] },
-                { _id: this.boardData.strikes.tiles[1].id, hidden: false, x: this.boardData.strikes.positions[1][1] },
+                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[1][0] + boardX },
+                { _id: this.boardData.strikes.tiles[1].id, hidden: false, x: this.boardData.strikes.positions[1][1] + boardX },
             ];
             await canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
             setTimeout(function () { hideStrikes(tileUpdateData) }, 1000);
         } else if (strikeNum == 3) {
             let tileUpdateData = [
-                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[2][0] },
-                { _id: this.boardData.strikes.tiles[1].id, hidden: false, x: this.boardData.strikes.positions[2][1] },
-                { _id: this.boardData.strikes.tiles[2].id, hidden: false, x: this.boardData.strikes.positions[2][2] },
+                { _id: this.boardData.strikes.tiles[0].id, hidden: false, x: this.boardData.strikes.positions[2][0] + boardX },
+                { _id: this.boardData.strikes.tiles[1].id, hidden: false, x: this.boardData.strikes.positions[2][1] + boardX },
+                { _id: this.boardData.strikes.tiles[2].id, hidden: false, x: this.boardData.strikes.positions[2][2] + boardX },
             ];
             await canvas.scene.updateEmbeddedDocuments("Tile", tileUpdateData);
             setTimeout(function () { hideStrikes(tileUpdateData) }, 1000);

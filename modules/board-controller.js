@@ -135,6 +135,7 @@ export class BoardController extends FormApplication {
             this.boardData = {};
             this.boardData.answerFontSize = flagData.answerFontSize;
 
+            this.boardData.boardTile = boardTile;
             this.boardData.totalScore = canvas.scene.drawings.get(flagData.totalScore);
             this.boardData.strikes = flagData.strikes;
             this.boardData.strikes.tiles[0] = canvas.scene.tiles.get(this.boardData.strikes.tiles[0]);
