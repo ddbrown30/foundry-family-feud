@@ -30,7 +30,7 @@ jobs:
         bugs: https://github.com/${{github.repository}}/issues
 
     # Create a zip file with all files required by the module to add to the release
-    - run: zip -r ./module.zip module.json LICENSE swade-shape-changer.js lang/ styles/ modules/ templates/ packs/
+    - run: zip -r ./module.zip module.json LICENSE foundry-family-feud.js styles/ modules/ templates/ packs/ fonts/ assets/
 
     # Create a release for this specific version
     - name: Update Release with Files
