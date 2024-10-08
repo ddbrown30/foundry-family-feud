@@ -1,8 +1,8 @@
 {
-  "name": "Generate Board",
+  "name": "Reposition Board",
   "type": "script",
-  "command": "game.foundryFamilyFeud.generateBoard(0, 0)",
-  "img": "modules/foundry-family-feud/assets/generate.svg",
+  "command": "game.foundryFamilyFeud.repositionBoard(x=0, y=0)",
+  "img": "modules/foundry-family-feud/assets/move.svg",
   "author": "26zedh1nuCLjFH0V",
   "scope": "global",
   "folder": null,
@@ -17,11 +17,11 @@
     "coreVersion": "12.331",
     "systemId": "swade",
     "systemVersion": "4.1.1",
-    "createdTime": 1728345282698,
-    "modifiedTime": 1728345282707,
+    "createdTime": 1728358077765,
+    "modifiedTime": 1728358077765,
     "lastModifiedBy": "26zedh1nuCLjFH0V"
   },
-  "_id": "UnngD2KuheLgE9RJ",
-  "sort": 200000,
-  "_key": "!macros!UnngD2KuheLgE9RJ"
+  "_id": "dfUDdmfcrl4ZgFqC",
+  "sort": 0,
+  "_key": "!macros!dfUDdmfcrl4ZgFqC"
 }

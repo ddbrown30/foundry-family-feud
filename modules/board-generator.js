@@ -4,14 +4,22 @@ import { Utils } from "./utils.js";
 
 export class BoardGenerator {
 
-    static async generateBoard(x, y) {
+    static async generateBoard(xOffset=0, yOffset=0, scale=1) {
         let boardData = {};
 
+        function transformX(x) {
+            return (x * scale) + xOffset;
+        }
+
+        function transformY(y) {
+            return (y * scale) + yOffset;
+        }
+
         let tileData = {
-            width: 1000,
-            height: 562,
-            x: 0,
-            y: 0,
+            width: 1000 * scale,
+            height: 562 * scale,
+            x: transformX(0),
+            y: transformY(0),
             elevation: 0,
             texture: {
                 src: FFF_CONFIG.DEFAULT_CONFIG.images.board
@@ -21,11 +29,11 @@ export class BoardGenerator {
 
         let textData = {
             shape: {
-                width: 178,
-                height: 100,
+                width: 178 * scale,
+                height: 100 * scale,
             },
-            x: 411,
-            y: 44,
+            x: transformX(411),
+            y: transformY(44),
             elevation: 10,
             strokeAlpha: 0,
             fontFamily: "Anton",
@@ -36,9 +44,9 @@ export class BoardGenerator {
         let totalScore = await BoardGenerator.createText(textData);
         boardData.totalScore = totalScore.id;
 
-        tileData.width = 208;
-        tileData.height = 277;
-        tileData.y = 208;
+        tileData.width = 208 * scale;
+        tileData.height = 277 * scale;
+        tileData.y = transformY(208);
         tileData.elevation = 50;
         tileData.hidden = true;
         tileData.texture.src = FFF_CONFIG.DEFAULT_CONFIG.images.strike;
@@ -46,28 +54,28 @@ export class BoardGenerator {
         let strike2 = await BoardGenerator.createTile(tileData);
         let strike3 = await BoardGenerator.createTile(tileData);
         boardData.strikes = { tiles: [strike1.id, strike2.id, strike3.id], positions: [] };
-        boardData.strikes.positions[0] = [397];
-        boardData.strikes.positions[1] = [285, 508];
-        boardData.strikes.positions[2] = [174, 397, 620];
+        boardData.strikes.positions[0] = [transformX(397)];
+        boardData.strikes.positions[1] = [transformX(285), transformX(508)];
+        boardData.strikes.positions[2] = [transformX(174), transformX(397), transformX(620)];
 
-        const panelStartX = 190;
-        const panelStartY = 167;
-        const numberStartX = 295;
-        const numberStartY = 175;
-        const answerStartX = 203;
-        const answerStartY = 183;
-        const answerCountStartX = 439;
-        const answerCountStartY = 183;
-        const deltaX = 315;
-        const deltaY = 92;
+        const panelStartX = transformX(190);
+        const panelStartY = transformY(167);
+        const numberStartX = transformX(295);
+        const numberStartY = transformY(175);
+        const answerStartX = transformX(203);
+        const answerStartY = transformY(183);
+        const answerCountStartX = transformX(439);
+        const answerCountStartY = transformY(183);
+        const deltaX = 315 * scale;
+        const deltaY = 92 * scale;
 
         boardData.panels = [];
         for (let i = 0; i < 8; ++i) {
             boardData.panels[i] = {};
             const panel = boardData.panels[i];
 
-            tileData.width = 306;
-            tileData.height = 86;
+            tileData.width = 306 * scale;
+            tileData.height = 86 * scale;
             tileData.x = panelStartX + (deltaX * Math.floor(i / 4));
             tileData.y = panelStartY + (deltaY * Math.floor(i % 4));
             tileData.elevation = 10;
@@ -81,8 +89,8 @@ export class BoardGenerator {
             let revealedPanel = await BoardGenerator.createTile(tileData);
             panel.revealedPanel = revealedPanel.id;
 
-            tileData.width = 97;
-            tileData.height = 81;
+            tileData.width = 97 * scale;
+            tileData.height = 81 * scale;
             tileData.x = numberStartX + (deltaX * Math.floor(i / 4));
             tileData.y = numberStartY + (deltaY * Math.floor(i % 4));
             tileData.elevation = 20;
@@ -91,8 +99,8 @@ export class BoardGenerator {
             let numberTile = await BoardGenerator.createTile(tileData);
             panel.numberTile = numberTile.id;
 
-            textData.shape.width = 50;
-            textData.shape.height = 50;
+            textData.shape.width = 50 * scale;
+            textData.shape.height = 50 * scale;
             textData.x = answerCountStartX + (deltaX * Math.floor(i / 4));
             textData.y = answerCountStartY + (deltaY * Math.floor(i % 4));
             textData.elevation = 20;
@@ -102,7 +110,7 @@ export class BoardGenerator {
             let answerCount = await BoardGenerator.createText(textData);
             panel.answerCount = answerCount.id;
 
-            textData.shape.width = 232;
+            textData.shape.width = 232 * scale;
             textData.x = answerStartX + (deltaX * Math.floor(i / 4));
             textData.y = answerStartY + (deltaY * Math.floor(i % 4));
             textData.text = "Answer Text";
@@ -112,10 +120,6 @@ export class BoardGenerator {
         }
 
         await Utils.setModuleFlag(board, FFF_CONFIG.FLAGS.boardData, boardData);
-
-        if (x != 0 || y != 0) {
-            await BoardGenerator.repositionBoard(x, y);
-        }
     }
 
     static async createTile(tileData) {
