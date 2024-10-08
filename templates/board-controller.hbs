@@ -33,17 +33,26 @@
             {{/if}}
         </div>
 
-        <table>
+        {{#if questionLoaded}}
+        <table class="board-controller-table">
+            <tr>
+                <th></th>
+                <th style="text-align: left;">Answer</th>
+                <th>Count</th>
+                <th></th>
+                <th></th>
+            </tr>
             {{#each answers as |answer|}}
             <tr>
                 <td>{{@answer.label}}</td>
-                <td>Text: {{answer.text}}</td>
-                <td>Count: {{answer.count}}</td>
+                <td style="width:100%; text-align: left;">{{answer.text}}</td>
+                <td>{{answer.count}}</td>
                 <td><button type="button" name="reveal-score-{{@index}}">Reveal and Score</button></td>
                 <td><button type="button" name="reveal-{{@index}}">Reveal</button></td>
             </tr>
             {{/each}}
         </table>
+        {{/if}}
 
         {{#if questionLoaded}}
         <div class="board-controller-row strike-button">
@@ -51,7 +60,7 @@
             <button type="button" name="strike2">Strike 2</button>
             <button type="button" name="strike3">Strike 3</button>
         </div>
-        
+
         <div class="board-controller-row">
             <button type="button" name="total-score-button">Set Total Score</button>
             <input type="number" class="total-score-input" name="total-score-input" value="{{totalScoreInput}}">

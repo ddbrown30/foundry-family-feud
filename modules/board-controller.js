@@ -67,7 +67,7 @@ export class BoardController extends FormApplication {
         if (this.questionData.answers) {
             data.answers = this.questionData.answers;
             for (let i = 0; i < data.answers.length; ++i) {
-                data.answers[i].label = "Answer " + (i + 1);
+                data.answers[i].label = (i + 1);
             }
         }
 
