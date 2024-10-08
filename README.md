@@ -18,7 +18,7 @@ With everything set up, you're now able to run the game. Click the reveal and st
 
 ### Destroy Board
 
-If you want to destroy the board for any reason, just run the Destroy Board macro from that scene. This will not have any effect on your saved questions but it will obviously disrupt any active game.
+If you want to destroy the board for any reason, just run the Destroy Board macro from that scene. This will not have any effect on your saved questions but it will obviously disrupt any active game. If something goes wrong with that, you can delete everything by hand instead but be aware that the tiles are at different elevations and so you may need to switch to the foreground layer to select and delete everything.
 
 ## Feedback
 
