@@ -40,8 +40,14 @@ export class GameBoard {
                 textMetrics = PIXI.TextMetrics.measureText(answerText, style);
             }
 
+            let textX = panel.answerTextStartingX + this.boardData.boardTile.x;
+            if (textMetrics.width < panel.answerText.shape.width) {
+                let halfDelta = (panel.answerText.shape.width - textMetrics.width) / 2;
+                textX -= halfDelta;
+            }
+
             let textUpdateData = [
-                { _id: panel.answerText.id, hidden: true, text: answerText, fontSize: fontSize },
+                { _id: panel.answerText.id, hidden: true, text: answerText, fontSize: fontSize, x: textX },
                 { _id: panel.answerCount.id, hidden: true, text: answerCount },
             ];
             await canvas.scene.updateEmbeddedDocuments("Drawing", textUpdateData);

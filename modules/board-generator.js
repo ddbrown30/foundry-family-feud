@@ -62,7 +62,7 @@ export class BoardGenerator {
         const panelStartY = transformY(167);
         const numberStartX = transformX(295);
         const numberStartY = transformY(175);
-        const answerStartX = transformX(203);
+        const answerStartX = transformX(205);
         const answerStartY = transformY(183);
         const answerCountStartX = transformX(439);
         const answerCountStartY = transformY(183);
@@ -117,6 +117,7 @@ export class BoardGenerator {
             textData.text = "Answer Text";
             textData.hidden = true;
             let answerText = await BoardGenerator.createText(textData);
+            panel.answerTextStartingX = textData.x;
             panel.answerText = answerText.id;
         }
 

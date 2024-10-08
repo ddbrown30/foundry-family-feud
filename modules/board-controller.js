@@ -153,6 +153,7 @@ export class BoardController extends FormApplication {
                 panel.numberTile = canvas.scene.tiles.get(panelIds.numberTile);
                 panel.answerCount = canvas.scene.drawings.get(panelIds.answerCount);
                 panel.answerText = canvas.scene.drawings.get(panelIds.answerText);
+                panel.answerTextStartingX = panelIds.answerTextStartingX;
             }
 
             this.boardLoaded = true;    
