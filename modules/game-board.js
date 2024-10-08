@@ -16,7 +16,7 @@ export class GameBoard {
     async resetBoard() {
         this.activeQuestion.totalScore = 0;
 
-        await canvas.scene.updateEmbeddedDocuments("Drawing", [{ _id: this.boardData.totalScore.id, text: "0" }]);
+        await canvas.scene.updateEmbeddedDocuments("Drawing", [{ _id: this.boardData.totalScore.id, hidden: false, text: "0" }]);
 
         for (let i = 0; i < 8; ++i) {
             const panel = this.boardData.panels[i];

@@ -12,7 +12,7 @@ export class BoardGenerator {
             height: 562,
             x: 0,
             y: 0,
-            z: 0,
+            elevation: 0,
             texture: {
                 src: FFF_CONFIG.DEFAULT_CONFIG.images.board
             }
@@ -26,7 +26,7 @@ export class BoardGenerator {
             },
             x: 411,
             y: 44,
-            z: 10,
+            elevation: 10,
             strokeAlpha: 0,
             fontFamily: "Anton",
             fontSize: 72,
@@ -39,7 +39,7 @@ export class BoardGenerator {
         tileData.width = 208;
         tileData.height = 277;
         tileData.y = 208;
-        tileData.z = 50;
+        tileData.elevation = 50;
         tileData.hidden = true;
         tileData.texture.src = FFF_CONFIG.DEFAULT_CONFIG.images.strike;
         let strike1 = await BoardGenerator.createTile(tileData);
@@ -70,7 +70,7 @@ export class BoardGenerator {
             tileData.height = 86;
             tileData.x = panelStartX + (deltaX * Math.floor(i / 4));
             tileData.y = panelStartY + (deltaY * Math.floor(i % 4));
-            tileData.z = 10;
+            tileData.elevation = 10;
             tileData.texture.src = FFF_CONFIG.DEFAULT_CONFIG.images.unrevealedPanel;
             tileData.hidden = false;
             let unrevealedPanel = await BoardGenerator.createTile(tileData);
@@ -85,7 +85,7 @@ export class BoardGenerator {
             tileData.height = 81;
             tileData.x = numberStartX + (deltaX * Math.floor(i / 4));
             tileData.y = numberStartY + (deltaY * Math.floor(i % 4));
-            tileData.z = 20;
+            tileData.elevation = 20;
             tileData.texture.src = FFF_CONFIG.DEFAULT_CONFIG.images.answers[i];
             tileData.hidden = true;
             let numberTile = await BoardGenerator.createTile(tileData);
@@ -95,7 +95,7 @@ export class BoardGenerator {
             textData.shape.height = 50;
             textData.x = answerCountStartX + (deltaX * Math.floor(i / 4));
             textData.y = answerCountStartY + (deltaY * Math.floor(i % 4));
-            textData.z = 20;
+            textData.elevation = 20;
             textData.fontSize = 44;
             textData.text = "99";
             textData.hidden = true;
