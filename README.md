@@ -10,7 +10,7 @@ To start, run the Question Editor macro to open the Question Editor. Question da
 
 On whatever scene you plan to use for the game, run the Generate Board macro. By default, it will create and place all of the tiles and drawings required for the game to function. It creates it in the upper left corner of the scene, but you can adjust it by using the Reposition Board macro. Both the Generate and Reposition macros can be edited to change the position they use.
 
-### Set Up a Question
+### Run a Question
 
 To actually run the game, start by running the Board Controller macro to open the Board Controller. While on the scene that contains the board, click the Find Board button. Next, select the journal and page that contains the question data you would like to use and click the Load Question button. Finally, click the Reset Board button to set the board to the correct state. As the GM, things will look a bit cluttered due to the overlapping tiles and drawings, but everything will look good on the player side.
 
