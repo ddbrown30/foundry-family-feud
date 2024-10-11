@@ -21,6 +21,11 @@ export class QuestionEditor extends FormApplication {
 
         this.questionData.selectedJournalName = this.createNewJournalOption;
         this.questionData.selectedPageName = this.createNewPageOption;
+
+        let questionJournal = game.journal.find((j) => Utils.getModuleFlag(j, FFF_CONFIG.FLAGS.questionJournal));
+        if (questionJournal) {
+            this.questionData.selectedJournalName = questionJournal.name;
+        }
     }
 
     /**
@@ -221,6 +226,7 @@ export class QuestionEditor extends FormApplication {
 
         let pageText = JSON.stringify(questionData, null, 2);
         await journal.updateEmbeddedDocuments("JournalEntryPage", [{_id: page.id, "text.content": pageText}]);
+        await Utils.setModuleFlag(journal, FFF_CONFIG.FLAGS.questionJournal, true);
     }
 
     async onLoadQuestion(event) {

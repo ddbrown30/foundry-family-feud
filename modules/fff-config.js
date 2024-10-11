@@ -38,6 +38,7 @@ export const DEFAULT_CONFIG = {
 
 export const FLAGS = {
     boardData: "boardData",
+    questionJournal: "questionJournal",
 }
 
 export const SETTING_KEYS = {

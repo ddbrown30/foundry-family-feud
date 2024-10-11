@@ -37,11 +37,7 @@ export class BoardController extends FormApplication {
         data.questionLoaded = !!this.questionData.answers?.length;
         data.selectedPageName = this.questionData.selectedPageName;
 
-        data.journals = [];
-
-        for (const journal of game.journal) {
-            data.journals.push(journal);
-        }
+        data.journals = game.journal.filter((j) => Utils.getModuleFlag(j, FFF_CONFIG.FLAGS.questionJournal));
         data.journals.sort((a, b) => a.name.localeCompare(b.name));
         data.selectedJournalName = this.questionData.selectedJournalName = this.questionData.selectedJournalName ?? data.journals[0]?.name;
 
