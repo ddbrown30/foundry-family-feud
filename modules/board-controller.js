@@ -103,7 +103,7 @@ export class BoardController extends FormApplication {
 
     async onButton(event) {
         event.preventDefault();
-        
+
         const name = event.target.name;
         if (name.startsWith("reveal")) {
             this.onReveal(event);
@@ -124,7 +124,7 @@ export class BoardController extends FormApplication {
 
     async onFindBoard(event) {
         event.preventDefault();
-        
+
         let boardTile = canvas.scene.tiles.find((t) => Utils.hasModuleFlags(t));
         if (boardTile) {
             let flagData = Utils.getModuleFlag(boardTile, FFF_CONFIG.FLAGS.boardData);
@@ -137,13 +137,13 @@ export class BoardController extends FormApplication {
             this.boardData.strikes.tiles[0] = canvas.scene.tiles.get(this.boardData.strikes.tiles[0]);
             this.boardData.strikes.tiles[1] = canvas.scene.tiles.get(this.boardData.strikes.tiles[1]);
             this.boardData.strikes.tiles[2] = canvas.scene.tiles.get(this.boardData.strikes.tiles[2]);
-            
+
             this.boardData.panels = [];
             for (let i = 0; i < 8; ++i) {
                 this.boardData.panels[i] = {};
                 const panel = this.boardData.panels[i];
                 const panelIds = flagData.panels[i];
-                
+
                 panel.unrevealedPanel = canvas.scene.tiles.get(panelIds.unrevealedPanel);
                 panel.revealedPanel = canvas.scene.tiles.get(panelIds.revealedPanel);
                 panel.numberTile = canvas.scene.tiles.get(panelIds.numberTile);
@@ -152,14 +152,14 @@ export class BoardController extends FormApplication {
                 panel.answerTextStartingX = panelIds.answerTextStartingX;
             }
 
-            this.boardLoaded = true;    
+            this.boardLoaded = true;
             this.gameBoard = new GameBoard(this.boardData);
         }
     }
 
     async onLoadQuestion(event) {
         event.preventDefault();
-        
+
         let selectedJournal = game.journal.find((j) => j.name == this.questionData.selectedJournalName);
         if (selectedJournal) {
             let selectedPage = selectedJournal.pages.find((p) => p.name == this.questionData.selectedPageName);
@@ -209,7 +209,7 @@ export class BoardController extends FormApplication {
     async onSetTotalScore(event) {
         event.preventDefault();
         const totalScoreInput = this._element.find("input[name=total-score-input")[0];
-        if(totalScoreInput.value.length) {
+        if (totalScoreInput.value.length) {
             this.gameBoard.setTotalScore(Number(totalScoreInput.value));
         }
     }

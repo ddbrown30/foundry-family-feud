@@ -13,6 +13,7 @@ export const DEFAULT_CONFIG = {
     templates: {
         questionEditor: `${PATH}/templates/question-editor.hbs`,
         boardController: `${PATH}/templates/board-controller.hbs`,
+        newVersionDialog: `${PATH}/templates/new-version-dialog.hbs`,
     },
     images: {
         board: `${PATH}/assets/board.webp`,
@@ -42,18 +43,7 @@ export const FLAGS = {
 }
 
 export const SETTING_KEYS = {
-    board: "board",
-    unrevealedPanel: "unrevealedPanel",
-    revealedPanel: "revealedPanel",
-    answers: [
-        "answer1",
-        "answer2",
-        "answer3",
-        "answer4",
-        "answer5",
-        "answer6",
-        "answer7",
-        "answer8",
-    ]
+    lastGitCheck: "lastGitCheck",
+    viewedReleaseUpdate: "viewedReleaseUpdate",
 }
 

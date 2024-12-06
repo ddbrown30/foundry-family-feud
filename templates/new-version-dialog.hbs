@@ -1,0 +1,14 @@
+<form id="new-version">
+    <div>
+        <p>A new version of Foundry Family Feud is available.<br>Version: {{currentVersion}} → {{newVersion}}</p>
+        <p style="user-select: text">You can find the latest release <a href="https://github.com/ddbrown30/foundry-family-feud/releases/latest">here</a> or you can use this link to install it through Foundry:
+            https://github.com/ddbrown30/foundry-family-feud/releases/latest/download/module.json</p>
+
+        {{#if hasChangelog}}
+        <br>
+        <h3>Changelog</h3>
+        <p>{{{latestChangeLog}}}</p>
+        <br>
+        {{/if}}
+    </div>
+</form>
