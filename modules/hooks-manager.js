@@ -36,7 +36,9 @@ export class HooksManager {
 
             Utils.loadTemplates();
             registerSettings();
-
+        });
+        
+        Hooks.on("ready", () => {
             ReleaseChecker.checkForNewRelease();
         });
     }

@@ -4,6 +4,10 @@ import { Utils } from "./utils.js";
 export class ReleaseChecker {
 
     static async checkForNewRelease() {
+        if (!game.user.isGM) {
+            return;
+        }
+        
         const lastGitRequestTimestamp = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.lastGitCheck) ?? 0;
         const minTimeBetweenChecks = 3600000; //1 hour
         if (Date.now() - lastGitRequestTimestamp < minTimeBetweenChecks) {
