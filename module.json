@@ -3,8 +3,8 @@
   "title": "Foundry Family Feud",
   "description": "<p>A module for creating a Family Feud game.</p>",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12.331"
+    "minimum": "13",
+    "verified": "13.346"
   },
   "packs": [
     {
