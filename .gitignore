@@ -1,6 +1,6 @@
 # foundry vtt
 foundry.js
-.vscode/launch.json
+.vscode/
 Thumbs.db
 
 node_modules/

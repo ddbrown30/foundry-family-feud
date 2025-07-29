@@ -7,7 +7,7 @@ export class ReleaseChecker {
         if (!game.user.isGM) {
             return;
         }
-        
+
         const lastGitRequestTimestamp = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.lastGitCheck) ?? 0;
         const minTimeBetweenChecks = 3600000; //1 hour
         if (Date.now() - lastGitRequestTimestamp < minTimeBetweenChecks) {
@@ -19,7 +19,7 @@ export class ReleaseChecker {
         if (foundry.utils.isNewerVersion(latestRelease.version, module.version)) {
             ReleaseChecker.showNewVersionDialog(latestRelease, module);
         }
-        
+
         Utils.setSetting(FFF_CONFIG.SETTING_KEYS.lastGitCheck, Date.now());
     }
 
@@ -53,7 +53,7 @@ export class ReleaseChecker {
             return null;
         }
     }
-    
+
     static async showNewVersionDialog(latestRelease, module) {
         const lastViewedRelease = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdate) ?? 0;
         if (foundry.utils.isNewerVersion(latestRelease.version, lastViewedRelease) == false) {
@@ -67,7 +67,7 @@ export class ReleaseChecker {
             latestChangeLog: latestRelease.latestChangeLog,
             hasChangelog: (latestRelease.latestChangeLog.length > 0),
         };
-        const html = await renderTemplate(FFF_CONFIG.DEFAULT_CONFIG.templates.newVersionDialog, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(FFF_CONFIG.DEFAULT_CONFIG.templates.newVersionDialog, templateData);
         Dialog.prompt({
             title: "New Version Available",
             content: html,
