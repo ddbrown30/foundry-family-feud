@@ -9,9 +9,16 @@ export function registerSettings() {
         type: Number,
         default: 0,
     });
-    
-    Utils.registerSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdate, {
-        scope: "client ",
+
+    Utils.registerSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateClient, {
+        scope: "client",
+        config: false,
+        type: String,
+        default: "0",
+    });
+
+    Utils.registerSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateWorld, {
+        scope: "world",
         config: false,
         type: String,
         default: "0",

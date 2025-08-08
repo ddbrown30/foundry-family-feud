@@ -44,6 +44,7 @@ export const FLAGS = {
 
 export const SETTING_KEYS = {
     lastGitCheck: "lastGitCheck",
-    viewedReleaseUpdate: "viewedReleaseUpdate",
+    viewedReleaseUpdateClient: "viewedReleaseUpdateClient",
+    viewedReleaseUpdateWorld: "viewedReleaseUpdateWorld",
 }
 

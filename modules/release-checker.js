@@ -54,8 +54,14 @@ export class ReleaseChecker {
         }
     }
 
+    static getLastViewedRelease() {
+        const viewedReleaseUpdateClient = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateClient) ?? 0;
+        const viewedReleaseUpdateWorld = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateWorld) ?? 0;
+        return viewedReleaseUpdateWorld > viewedReleaseUpdateClient ? viewedReleaseUpdateWorld : viewedReleaseUpdateClient;
+    }
+
     static async showNewVersionDialog(latestRelease, module) {
-        const lastViewedRelease = Utils.getSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdate) ?? 0;
+        const lastViewedRelease = ReleaseChecker.getLastViewedRelease();
         if (foundry.utils.isNewerVersion(latestRelease.version, lastViewedRelease) == false) {
             //The user has already seen the notification for this release
             return;
@@ -68,14 +74,16 @@ export class ReleaseChecker {
             hasChangelog: (latestRelease.latestChangeLog.length > 0),
         };
         const html = await foundry.applications.handlebars.renderTemplate(FFF_CONFIG.DEFAULT_CONFIG.templates.newVersionDialog, templateData);
-        Dialog.prompt({
-            title: "New Version Available",
+        foundry.applications.api.DialogV2.prompt({
+            window: { title: "New Version Available" },
             content: html,
             rejectClose: false,
-            callback: () => {
-                Utils.setSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdate, latestRelease.version);
-            },
-            close: () => {},
+            ok: {
+                callback: () => {
+                    Utils.setSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateClient, latestRelease.version);
+                    Utils.setSetting(FFF_CONFIG.SETTING_KEYS.viewedReleaseUpdateWorld, latestRelease.version);
+                },
+            }
         });
     }
 }
