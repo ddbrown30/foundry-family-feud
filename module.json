@@ -4,7 +4,7 @@
   "description": "<p>A module for creating a Family Feud game.</p>",
   "compatibility": {
     "minimum": "13",
-    "verified": "13.346"
+    "verified": "13.347"
   },
   "packs": [
     {
